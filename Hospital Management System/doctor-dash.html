@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Doctor Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+
+    .dashboard {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .patients-today {
+      flex: 2;
+      background: white;
+      margin: 0 20px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .patients-today h2 {
+      margin-top: 0;
+    }
+
+    .appointment {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .appointment:last-child {
+      border-bottom: none;
+    }
+
+    .sidebar {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .patient-list, .calendar {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .patient-list h3, .calendar h3 {
+      margin-top: 0;
+    }
+
+    .patient {
+      margin-bottom: 10px;
+    }
+
+    .patient a {
+      text-decoration: none;
+      color: #007BFF;
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="sidebar">
+      <div class="patient-list">
+        <h3>All Patients</h3>
+        <div class="patient"><a href="patient-john.html">John Doe</a></div>
+        <div class="patient"><a href="patient-jane.html">Jane Smith</a></div>
+        <div class="patient"><a href="patient-mark.html">Mark Wilson</a></div>
+        <div class="patient"><a href="patient-emily.html">Emily Davis</a></div>
+      </div>
+      <div class="calendar">
+        <h3>Calendar</h3>
+        <iframe src="https://calendar.google.com/calendar/embed?src=en.indian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FCalcutta"></iframe>
+      </div>
+    </div>
+
+    <div class="patients-today">
+      <h2>Today's Appointments</h2>
+      <div class="appointment">
+        <strong><a href="patient-john.html">John Doe</a></strong> - 10:00 AM
+      </div>
+      <div class="appointment">
+        <strong><a href="patient-jane.html">Jane Smith</a></strong> - 11:30 AM
+      </div>
+      <div class="appointment">
+        <strong><a href="patient-mark.html">Mark Wilson</a></strong> - 2:00 PM
+      </div>
+      <div class="appointment">
+        <strong><a href="patient-emily.html">Emily Davis</a></strong> - 3:15 PM
+      </div>
+    </div>
+  </div>
+</body>
+</html>

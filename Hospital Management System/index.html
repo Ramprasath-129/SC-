@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Doctor/Patient Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      padding: 50px;
+    }
+
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 350px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .tabs button {
+      width: 49%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: #e0e0e0;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .tabs button.active {
+      background-color: #4285f4;
+      color: white;
+    }
+
+    .form-wrapper {
+      position: relative;
+      height: 240px;
+    }
+
+    .form-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      transform: translateX(30px);
+      transition: all 0.4s ease;
+      pointer-events: none;
+    }
+
+    .form-container.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: all;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .form-group button {
+      width: 100%;
+      padding: 10px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .signup-link {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .signup-link a {
+      color: #4285f4;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="tabs">
+    <button id="doctorTab" class="active" onclick="switchTab('doctor')">Doctor</button>
+    <button id="patientTab" onclick="switchTab('patient')">Patient</button>
+  </div>
+
+  <div class="form-wrapper">
+    <!-- Doctor Login -->
+    <div id="doctorForm" class="form-container active">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="doctorEmail">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="doctorPassword">
+      </div>
+      <div class="form-group">
+        <button onclick="login('doctor')">Login</button>
+      </div>
+      <div class="signup-link">
+        Don't have an account? <a href="#" onclick="signup('doctor')">Sign up here</a>
+      </div>
+    </div>
+
+    <!-- Patient Login -->
+    <div id="patientForm" class="form-container">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="patientEmail">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="patientPassword">
+      </div>
+      <div class="form-group">
+        <button onclick="login('patient')">Login</button>
+      </div>
+      <div class="signup-link">
+        Don't have an account? <a href="#" onclick="signup('patient')">Sign up here</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function switchTab(type) {
+    const doctorForm = document.getElementById("doctorForm");
+    const patientForm = document.getElementById("patientForm");
+    const doctorTab = document.getElementById("doctorTab");
+    const patientTab = document.getElementById("patientTab");
+
+    if (type === 'doctor') {
+      doctorForm.classList.add("active");
+      patientForm.classList.remove("active");
+      doctorTab.classList.add("active");
+      patientTab.classList.remove("active");
+    } else {
+      patientForm.classList.add("active");
+      doctorForm.classList.remove("active");
+      patientTab.classList.add("active");
+      doctorTab.classList.remove("active");
+    }
+  }
+
+  function login(role) {
+    const email = document.getElementById(role + "Email").value.trim();
+    const password = document.getElementById(role + "Password").value.trim();
+
+    if (role === 'doctor') {
+      const stored = JSON.parse(localStorage.getItem("doctor_user"));
+      if (!stored) {
+        alert("No account found for this role.");
+        return;
+      }
+      if (stored.email === email && stored.password === password) {
+        alert("Doctor login successful!");
+        window.location.href = "doctor-dash.html";
+      } else {
+        alert("Invalid doctor credentials.");
+      }
+    } else if (role === 'patient') {
+      const patients = {
+        "john@gmail.com": { password: "john123", page: "patient-dashboard-john.html" },
+        "jane@gmail.com": { password: "jane123", page: "patient-dashboard-jane.html" },
+        "mark@gmail.com": { password: "mark123", page: "patient-dashboard-mark.html" },
+        "emily@gmail.com": { password: "emily123", page: "patient-dashboard-emily.html" }
+      };
+
+      if (patients[email] && patients[email].password === password) {
+        alert("Patient login successful!");
+        window.location.href = patients[email].page;
+      } else {
+        alert("Invalid patient credentials.");
+      }
+    }
+  }
+
+  function signup(role) {
+    const email = prompt("Enter your email:");
+    const password = prompt("Enter your password:");
+
+    if (!email || !password) {
+      alert("Both fields are required.");
+      return;
+    }
+
+    localStorage.setItem(role + "_user", JSON.stringify({ email, password }));
+    alert(role.charAt(0).toUpperCase() + role.slice(1) + " account created!");
+  }
+</script>
+
+</body>
+</html>

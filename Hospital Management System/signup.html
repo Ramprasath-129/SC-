@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      padding-top: 80px;
+    }
+
+    .signup-container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .form-group button {
+      width: 100%;
+      padding: 10px;
+      background: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="signup-container">
+  <h2 id="title">Sign Up</h2>
+  <div class="form-group">
+    <label>Email</label>
+    <input type="email" id="signupEmail">
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" id="signupPassword">
+  </div>
+  <div class="form-group">
+    <button onclick="signup()">Create Account</button>
+  </div>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const role = params.get("role") || "doctor"; 
+  document.getElementById("title").innerText = `Sign Up as ${role.charAt(0).toUpperCase() + role.slice(1)}`;
+
+  function signup() {
+    const email = document.getElementById("signupEmail").value;
+    const password = document.getElementById("signupPassword").value;
+
+    if (!email || !password) {
+      alert("Please enter all fields.");
+      return;
+    }
+
+    localStorage.setItem(role + "_user", JSON.stringify({ email, password }));
+    alert("Account created for " + role + "! You can now log in.");
+    window.location.href = "index.html";
+  }
+</script>
+
+</body>
+</html>

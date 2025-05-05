@@ -1,0 +1,104 @@
+<!-- patient-dashboard-emily.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Emily Davis Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      padding: 40px;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px 30px;
+      max-width: 600px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    h2 {
+      margin-top: 30px;
+      color: #444;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input[type="date"],
+    input[type="time"] {
+      margin-top: 5px;
+      padding: 8px;
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .report {
+      background: #f9f9f9;
+      padding: 10px;
+      border-left: 4px solid #4caf50;
+      margin-top: 10px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome Emily Davis</h1>
+
+    <h2>Your EHR Summary</h2>
+    <p>Diagnosis: Seasonal Allergies</p>
+    <p>Medications: Cetirizine</p>
+    <p>Last Visit: April 10, 2025</p>
+
+    <h2>Book Appointment</h2>
+    <label>Date:
+      <input type="date" id="dateEmily">
+    </label>
+    <label>Time:
+      <input type="time" id="timeEmily">
+    </label>
+    <button onclick="book('Emily')">Book Appointment</button>
+
+    <h2>Doctor's Report</h2>
+    <div id="reportEmily" class="report">No report yet.</div>
+  </div>
+
+  <script>
+    function book(name) {
+      const date = document.getElementById('date' + name).value;
+      const time = document.getElementById('time' + name).value;
+      if (date && time) {
+        alert(`Appointment booked on ${date} at ${time}`);
+      } else {
+        alert('Please select both date and time.');
+      }
+    }
+  </script>
+</body>
+</html>

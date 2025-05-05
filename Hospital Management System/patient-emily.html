@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Emily Davis - EHR</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
+    .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h1 { text-align: center; }
+    .ehr-section { margin: 20px 0; }
+    .btns { text-align: center; margin-top: 30px; }
+    button { margin: 10px; padding: 10px 20px; font-size: 16px; border: none; border-radius: 5px; background-color: #007BFF; color: white; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
+    textarea { width: 100%; height: 100px; margin-top: 10px; border-radius: 5px; padding: 10px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Patient EHR: Emily Davis</h1>
+    <div class="ehr-section">
+      <h3>Diagnosis:</h3>
+      <p>Migraine - Recurring</p>
+    </div>
+    <div class="ehr-section">
+      <h3>Medications:</h3>
+      <ul>
+        <li>Sumatriptan 50mg</li>
+      </ul>
+    </div>
+    <div class="ehr-section">
+      <h3>Last Visit:</h3>
+      <p>April 28, 2025</p>
+    </div>
+    <div class="ehr-section" id="feedback-section" style="display:none;">
+      <h3>Feedback</h3>
+      <textarea placeholder="Enter feedback here..."></textarea>
+      <br><br>
+      <button onclick="submitFeedback()">Submit Feedback</button>
+    </div>
+    <div class="ehr-section" id="report-section" style="display:none;">
+      <h3>Report</h3>
+      <textarea placeholder="Write report here..."></textarea>
+      <br><br>
+      <button onclick="submitReport()">Submit Report</button>
+    </div>
+    <div class="btns">
+      <button onclick="document.getElementById('feedback-section').style.display='block'">Give Feedback</button>
+      <button onclick="document.getElementById('report-section').style.display='block'">Generate Report</button>
+      <button onclick="uploadReport()">Upload Report</button>
+    </div>
+  </div>
+
+  <script>
+    function submitFeedback() {
+      alert("Feedback submitted successfully.");
+      document.getElementById('feedback-section').style.display = 'none';
+    }
+
+    function submitReport() {
+      alert("Report generated successfully.");
+      document.getElementById('report-section').style.display = 'none';
+    }
+
+    function uploadReport() {
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = '.pdf,.doc,.docx';
+      fileInput.onchange = () => {
+        if (fileInput.files.length > 0) {
+          alert("Report uploaded: " + fileInput.files[0].name);
+        }
+      };
+      fileInput.click();
+    }
+  </script>
+</body>
+</html>
